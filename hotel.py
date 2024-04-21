@@ -69,7 +69,8 @@ def main():
     hotel.szoba_hozzaadas(KetagyasSzoba(102))
     hotel.szoba_hozzaadas(KetagyasSzoba(103))
 
-    # Példa foglalások
+    # Példa foglalások, Foglalási osztály
+
     hotel.foglalas(101, datetime(2024, 5, 20).date())
     hotel.foglalas(102, datetime(2024, 5, 21).date())
     hotel.foglalas(103, datetime(2024, 5, 22).date())
