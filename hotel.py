@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
 
-# Szobák létrehozása
-
 # Absztrakt Szoba osztály
 class Szoba(ABC):
     def __init__(self, szobaszam, ar):
@@ -39,10 +37,13 @@ class Szalloda:
     def szoba_hozzaadas(self, szoba):
         self.szobak.append(szoba)
 
+    def ervenyes_datum(self, datum):
+        return datum >= datetime.today().date()
+
     def foglalas(self, szobaszam, datum):
         if any(f['szobaszam'] == szobaszam and f['datum'] == datum for f in self.foglalasok):
             return "A szoba ezen a napon már foglalt."
-        if datum < datetime.now().date():
+        if not self.ervenyes_datum(datum):
             return "A dátum érvénytelen. Kérjük, jövőbeli dátumot adjon meg."
         szoba = next((s for s in self.szobak if s.szobaszam == szobaszam), None)
         if not szoba:
@@ -69,8 +70,7 @@ def main():
     hotel.szoba_hozzaadas(KetagyasSzoba(102))
     hotel.szoba_hozzaadas(KetagyasSzoba(103))
 
-    # Példa foglalások, Foglalási osztály
-
+    # Példa foglalások
     hotel.foglalas(101, datetime(2024, 5, 20).date())
     hotel.foglalas(102, datetime(2024, 5, 21).date())
     hotel.foglalas(103, datetime(2024, 5, 22).date())
@@ -100,4 +100,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
